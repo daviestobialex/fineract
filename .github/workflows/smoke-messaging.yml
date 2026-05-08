@@ -21,7 +21,7 @@ jobs:
             compose_file: docker-compose-postgresql-kafka.yml
 
     env:
-      DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      # DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
       IMAGE_NAME: fineract
 
     steps:

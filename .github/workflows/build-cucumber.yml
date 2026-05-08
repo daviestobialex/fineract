@@ -13,7 +13,7 @@ jobs:
 
     env:
       TZ: Asia/Kolkata
-      DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      # DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
 
     steps:
       - name: Set up JDK 21

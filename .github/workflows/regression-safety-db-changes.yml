@@ -69,7 +69,7 @@ jobs:
       DB_PASSWORD: postgres
       DB_NAME: fineract_default
       TZ: Asia/Kolkata
-      DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      # DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
       # E2E test configuration
       BASE_URL: https://localhost:8443
       TEST_USERNAME: mifos

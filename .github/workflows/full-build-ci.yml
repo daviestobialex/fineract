@@ -86,10 +86,10 @@ jobs:
     uses: ./.github/workflows/regression-safety-db-changes.yml
     secrets: inherit
 
-  run-sonarqube:
-    needs: build-core
-    uses: ./.github/workflows/sonarqube.yml
-    secrets: inherit
+  # run-sonarqube:
+  #   needs: build-core
+  #   uses: ./.github/workflows/sonarqube.yml
+  #   secrets: inherit
 
   run-integration-tests-sequentially-on-postgresql:
     needs: build-core

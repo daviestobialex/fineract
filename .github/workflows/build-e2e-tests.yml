@@ -20,7 +20,7 @@ jobs:
         total_shards: [15]
 
     env:
-      DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      # DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
       IMAGE_NAME: fineract
       BASE_URL: https://localhost:8443
       TEST_USERNAME: mifos
