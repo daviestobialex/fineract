@@ -38,6 +38,7 @@ import org.apache.fineract.infrastructure.core.exception.PlatformApiDataValidati
 import org.apache.fineract.infrastructure.core.serialization.FromJsonHelper;
 import org.apache.fineract.portfolio.account.AccountDetailConstants;
 import org.apache.fineract.portfolio.account.api.AccountTransfersApiConstants;
+import org.apache.fineract.portfolio.paymentdetail.PaymentDetailConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +47,8 @@ public class AccountTransfersDataValidator {
 
     private final FromJsonHelper fromApiJsonHelper;
     private final AccountTransfersDetailDataValidator accountTransfersDetailDataValidator;
-    private static final Set<String> REQUEST_DATA_PARAMETERS = new HashSet<>(Arrays.asList(AccountDetailConstants.localeParamName,
+    private static final Set<String> REQUEST_DATA_PARAMETERS = new HashSet<>(Arrays.asList(
+        AccountDetailConstants.localeParamName, PaymentDetailConstants.paymentTypeParamName,
             AccountDetailConstants.dateFormatParamName, AccountDetailConstants.fromOfficeIdParamName,
             AccountDetailConstants.fromClientIdParamName, AccountDetailConstants.fromAccountTypeParamName,
             AccountDetailConstants.fromAccountIdParamName, AccountDetailConstants.toOfficeIdParamName,

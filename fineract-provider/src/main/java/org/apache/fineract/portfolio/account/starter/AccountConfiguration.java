@@ -54,6 +54,7 @@ import org.apache.fineract.portfolio.loanaccount.domain.LoanAccountDomainService
 import org.apache.fineract.portfolio.loanaccount.service.LoanAssembler;
 import org.apache.fineract.portfolio.loanaccount.service.LoanReadPlatformService;
 import org.apache.fineract.portfolio.savings.domain.GSIMRepositoy;
+import org.apache.fineract.portfolio.paymentdetail.service.PaymentDetailWritePlatformService;
 import org.apache.fineract.portfolio.savings.domain.SavingsAccountAssembler;
 import org.apache.fineract.portfolio.savings.service.SavingsAccountDomainService;
 import org.apache.fineract.portfolio.savings.service.SavingsAccountWritePlatformService;
@@ -91,11 +92,11 @@ public class AccountConfiguration {
             LoanAccountDomainService loanAccountDomainService, SavingsAccountWritePlatformService savingsAccountWritePlatformService,
             AccountTransferDetailRepository accountTransferDetailRepository, LoanReadPlatformService loanReadPlatformService,
             GSIMRepositoy gsimRepository, ConfigurationDomainService configurationDomainService, ExternalIdFactory externalIdFactory,
-            FineractProperties fineractProperties) {
+            FineractProperties fineractProperties, PaymentDetailWritePlatformService paymentDetailWritePlatformService) {
         return new AccountTransfersWritePlatformServiceImpl(accountTransfersDataValidator, accountTransferAssembler,
                 accountTransferRepository, savingsAccountAssembler, savingsAccountDomainService, loanAccountAssembler,
                 loanAccountDomainService, savingsAccountWritePlatformService, accountTransferDetailRepository, loanReadPlatformService,
-                gsimRepository, configurationDomainService, externalIdFactory, fineractProperties);
+                gsimRepository, configurationDomainService, externalIdFactory, fineractProperties, paymentDetailWritePlatformService);
     }
 
     @Bean
