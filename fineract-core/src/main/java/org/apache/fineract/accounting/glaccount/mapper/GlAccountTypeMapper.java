@@ -32,4 +32,11 @@ public interface GlAccountTypeMapper {
     @Mapping(target = "description", source = "glAccountType.code")
     EnumOptionData map(GLAccountType glAccountType);
 
+    default EnumOptionData map(Integer accountTypeValue) {
+        if (accountTypeValue == null) {
+            return null;
+        }
+        return map(GLAccountType.fromInt(accountTypeValue));
+    }
+
 }
