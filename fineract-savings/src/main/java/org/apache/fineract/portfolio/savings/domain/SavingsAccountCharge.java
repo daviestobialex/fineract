@@ -240,10 +240,11 @@ public class SavingsAccountCharge extends AbstractAuditableWithUTCDateTimeCustom
 
     public void resetPropertiesForRecurringFees() {
         if (isMonthlyFee() || isAnnualFee() || isWeeklyFee()) {
-            // FIXME: AA: If charge is percentage of x amount then need to
-            // update amount outstanding accordingly.
-            // Right now annual and monthly charges supports charge calculation
-            // type flat.
+            // For percentage-based monthly fees, amountOutstanding is recomputed
+            // against the current account balance via updateMonthlyFeeAmount()
+            // before payCharge is called. Here we just reset the outstanding
+            // to the already-computed amount (which is correct for flat fees
+            // and is overwritten for percentage fees before collection).
             this.amountOutstanding = this.amount;
             this.paid = false;// reset to false for recurring fee.
             this.waived = false;
@@ -738,6 +739,10 @@ public class SavingsAccountCharge extends AbstractAuditableWithUTCDateTimeCustom
         return ChargeTimeType.fromInt(this.chargeTime).isWeeklyFee();
     }
 
+    public boolean isPercentageOfAmount() {
+        return ChargeCalculationType.fromInt(this.chargeCalculation).isPercentageOfAmount();
+    }
+
     public boolean hasCurrencyCodeOf(final String matchingCurrencyCode) {
         if (this.currencyCode() == null || matchingCurrencyCode == null) {
             return false;
@@ -784,6 +789,14 @@ public class SavingsAccountCharge extends AbstractAuditableWithUTCDateTimeCustom
 
     public BigDecimal updateWithdralFeeAmount(final BigDecimal transactionAmount) {
         return amountOutstanding = calculateWithdralFeeAmount(transactionAmount);
+    }
+
+    public void updateMonthlyFeeAmount(final BigDecimal accountBalance) {
+        if (ChargeCalculationType.fromInt(this.chargeCalculation).isPercentageOfAmount()) {
+            this.amountPercentageAppliedTo = accountBalance;
+            this.amount = percentageOf(accountBalance, this.percentage);
+            this.amountOutstanding = calculateOutstanding();
+        }
     }
 
     public BigDecimal updateNoWithdrawalFee() {

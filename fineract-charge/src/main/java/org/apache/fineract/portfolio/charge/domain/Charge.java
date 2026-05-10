@@ -251,7 +251,8 @@ public class Charge extends AbstractPersistableCustom<Long> {
             }
 
             if (!(ChargeTimeType.fromInt(getChargeTimeType()).isWithdrawalFee()
-                    || ChargeTimeType.fromInt(getChargeTimeType()).isSavingsNoActivityFee())
+                    || ChargeTimeType.fromInt(getChargeTimeType()).isSavingsNoActivityFee()
+                    || ChargeTimeType.fromInt(getChargeTimeType()).isMonthlyFee())
                     && ChargeCalculationType.fromInt(getChargeCalculation()).isPercentageOfAmount()) {
                 baseDataValidator.reset().parameter(CHARGE_CALCULATION_TYPE_PARAM_NAME).value(this.chargeCalculation)
                         .failWithCodeNoParameterAddedToErrorCode(
@@ -497,7 +498,8 @@ public class Charge extends AbstractPersistableCustom<Long> {
                 }
 
                 if (!(ChargeTimeType.fromInt(getChargeTimeType()).isWithdrawalFee()
-                        || ChargeTimeType.fromInt(getChargeTimeType()).isSavingsNoActivityFee())
+                        || ChargeTimeType.fromInt(getChargeTimeType()).isSavingsNoActivityFee()
+                        || ChargeTimeType.fromInt(getChargeTimeType()).isMonthlyFee())
                         && ChargeCalculationType.fromInt(getChargeCalculation()).isPercentageOfAmount()) {
                     baseDataValidator.reset().parameter(CHARGE_CALCULATION_TYPE_PARAM_NAME).value(this.chargeCalculation)
                             .failWithCodeNoParameterAddedToErrorCode(

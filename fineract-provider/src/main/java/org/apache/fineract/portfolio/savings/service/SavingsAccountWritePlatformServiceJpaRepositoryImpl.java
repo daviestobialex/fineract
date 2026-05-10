@@ -1492,6 +1492,10 @@ public class SavingsAccountWritePlatformServiceJpaRepositoryImpl implements Savi
         final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MM yyyy").withZone(DateUtils.getDateTimeZoneOfTenant());
 
         while (savingsAccountCharge.isNotFullyPaid() && DateUtils.isBefore(savingsAccountCharge.getDueDate(), transactionDate)) {
+            if (savingsAccountCharge.isMonthlyFee() && savingsAccountCharge.isPercentageOfAmount()) {
+                final BigDecimal accountBalance = savingsAccountCharge.savingsAccount().getAccountBalance();
+                savingsAccountCharge.updateMonthlyFeeAmount(accountBalance);
+            }
             payCharge(savingsAccountCharge, transactionDate, savingsAccountCharge.amoutOutstanding(), fmt, false);
         }
     }
